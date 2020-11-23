@@ -1,13 +1,20 @@
 const express = require('express');
-const {userLogin, userLogout, userSignup } = require('../controllers/userControllers')
+const {
+  userLogin,
+  userSignup,
+  getUserInfo,
+  addToCart
+} = require('../controllers/userControllers');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-router.post('/signup', userSignup)
+router.post('/signup', userSignup);
 
-router.post('/login', userLogin)
+router.post('/login', userLogin);
 
-router.post('/logout', userLogout)
+router.get('/profile', auth, getUserInfo);
 
+router.post('/profile/addtocart', auth, addToCart)
 
-module.exports = router
+module.exports = router;
